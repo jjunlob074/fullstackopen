@@ -13,8 +13,15 @@ const App = () => {
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
 
-  const handleClick = () => {
+  const handleClickVote = () => {
+    const newVotes = [...votes];
+    newVotes[selected]++;
+    setVotes(newVotes);
+  };
+
+  const handleClickAnecdote = () => {
     let newSelected;
     do {
       newSelected = Math.floor(Math.random() * anecdotes.length);
@@ -22,11 +29,24 @@ const App = () => {
     setSelected(newSelected);
   };
 
+  const mostVotedIndex = votes.indexOf(Math.max(...votes));
+  console.log(mostVotedIndex);
+  const allZeroVotes = votes.every(vote => vote === 0);
+
   return (
-    <div>
-      <p>{anecdotes[selected]}</p>
-      <button onClick={handleClick}>next anecdote</button>
-    </div>
+    <>
+      <h1>Anecdote of the day</h1>
+      <p><b>{`"${anecdotes[selected]}"`}</b></p>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={handleClickVote}>vote</button>
+      <button onClick={handleClickAnecdote}>next anecdote</button>
+      <h2>Anecdote with most votes:</h2>
+      {allZeroVotes ? (
+        <p>No votes yet.</p>
+      ) : (
+        <p><b>{`"${anecdotes[mostVotedIndex]}"`}</b></p>
+      )}
+    </>
   );
 }
 
