@@ -1,6 +1,6 @@
 const Part = ({ part }) => (
   <p>
-    {part.name} {part.exercises}
+    {part.name} =&gt; {part.exercises}
   </p>
 );
 
