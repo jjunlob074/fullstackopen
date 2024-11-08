@@ -1,32 +1,60 @@
-import { useState } from 'react'
+import { useState } from "react";
 
 const App = () => {
-  const [persons, setPersons] = useState([]) 
-  const [newName, setNewName] = useState('')
-  const nameExists = (name) => persons.some(person => person.name === name);
+  const [persons, setPersons] = useState([]);
+  const [newName, setNewName] = useState("");
+  const [newNumber, setNewNumber] = useState("");
+
+  const checkDuplicate = () => {
+    const duplicate = persons.find(
+      (person) => person.name === newName || person.number === newNumber
+    );
+    if (duplicate) {
+      return duplicate.name === newName
+        ? `${newName} is already in the phonebook!`
+        : `${newNumber} is already in the phonebook!`;
+    }
+    return null;
+  };
 
   const handleSubmit = (event) => {
-    event.preventDefault()
-    if (nameExists(newName)) {
-      alert(`${newName} is already in the phonebook!`)
-      return
+    event.preventDefault();
+    const duplicateMessage = checkDuplicate();
+    if (duplicateMessage) {
+      alert(duplicateMessage);
+      return;
     }
-    setPersons([...persons, { name: newName }])
-    setNewName('')
-  }
+    setPersons([...persons, { name: newName, number: newNumber }]);
+    setNewName("");
+    setNewNumber("");
+  };
 
   return (
     <div>
       <h2>Phonebook</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          name: <input onChange={(event) => setNewName(event.target.value)} 
-          value={newName} 
-          required
-          />
+          <label>
+            Name:
+            <input
+              onChange={(event) => setNewName(event.target.value)}
+              value={newName}
+              required
+            />
+          </label>
         </div>
         <div>
-          <button type="submit">add</button>
+          <label>
+            Number:
+            <input
+              onChange={(event) => setNewNumber(event.target.value)}
+              value={newNumber}
+              required
+            />
+          </label>
+        </div>
+        <div>
+          <button type="submit">Add</button>
         </div>
       </form>
       <h2>Numbers</h2>
@@ -35,12 +63,14 @@ const App = () => {
       ) : (
         <ul>
           {persons.map((person) => (
-            <li key={person.name}>{person.name}</li>
+            <li key={person.name}>
+              {person.name} -- {person.number}
+            </li>
           ))}
         </ul>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
