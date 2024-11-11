@@ -9,6 +9,7 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
+  const [notification, setNotification] = useState({ message: '', type: '' });
   const hookGetPersons = () => {
     Persons
       .getAll()
@@ -25,6 +26,11 @@ const App = () => {
       )
     : persons;
 
+    const showNotification = (message, type) => {
+      setNotification({ message, type });
+      setTimeout(() => setNotification({ message: '', type: '' }), 3000);
+    };
+    
   return (
     <div>
       <h2>Phonebook</h2>
@@ -37,12 +43,15 @@ const App = () => {
         newNumber={newNumber}
         setNewName={setNewName}
         setNewNumber={setNewNumber}
+        notification={notification}
+        showNotification={showNotification}
       />
       <h3>Numbers</h3>
       <PersonsList 
       persons={persons} 
       setPersons= {setPersons}
       filteredPersons={filteredPersons}
+      showNotification={showNotification}  
       />
     </div>
   );

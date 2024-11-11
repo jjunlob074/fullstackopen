@@ -12,7 +12,7 @@ const Filter = ({ filter, setFilter }) => {
       filter shown with{" "}
       <input type="text" value={filter} onChange={handleFilterChange} />
       <br />
-      <button onClick={handleClearFilter}>Mostrar Todos</button>
+      <button onClick={handleClearFilter}>Show All</button>
     </div>
   );
 };

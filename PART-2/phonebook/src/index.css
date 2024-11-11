@@ -1,0 +1,135 @@
+/* Encabezados */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif; /* Fuente moderna */
+    color: #333; /* Color oscuro para buen contraste */
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.75rem;
+    font-weight: 500;
+}
+
+/* Textos */
+body {
+    font-family: 'Merriweather', serif; /* Fuente serif elegante */
+    line-height: 1.6;
+    color: #555;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    max-width: 100%; /* Hacer que el ancho no esté limitado a 600px */
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 1rem; /* Asegura que haya espacio en dispositivos pequeños */
+    }
+}
+
+/* Links */
+a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #125dbb;
+}
+
+/* Formularios */
+form {
+    max-width: 90%;
+    margin: 2em auto;
+    padding: 2em;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+input,
+textarea,
+select {
+    width: 80%; /* Asegura que los campos de entrada ocupen todo el ancho disponible */
+    padding: 0.8em;
+    margin-bottom: 1em;
+    margin-left: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-family: inherit;
+}
+
+input[type="submit"],
+button {
+    padding: 0.8em 1.5em;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #1a73e8;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #125dbb;
+}
+
+.buttonDelete {
+    background-color: #C82333;
+}
+
+.buttonDelete:hover {
+    background-color: #a81a28;
+}
+
+/* Listas */
+/* Contenedor de la lista en formato de tabla */
+ul {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Tres columnas de igual tamaño por defecto */
+    gap: 1em; /* Espacio entre los elementos */
+    padding: 0;
+    list-style-type: none;
+}
+
+li {
+    display: grid;
+    grid-template-columns: 1fr; /* Una sola columna por elemento */
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 100%; /* Asegura que los elementos no se desborden */
+    margin-top: 0.5em;
+}
+
+/* Media query para pantallas medianas (ej. tablet) */
+@media (max-width: 1024px) {
+    ul {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas para pantallas medianas */
+    }
+}
+
+/* Media query para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+    ul {
+        grid-template-columns: 1fr; /* Una columna para pantallas pequeñas */
+    }
+}
