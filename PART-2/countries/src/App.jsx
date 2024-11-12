@@ -4,16 +4,16 @@ import SearchInput from './components/SearchInput';
 import CountryList from './components/CountryList';
 import CountryDetail from './components/CountryDetail';
 import Weather from './services/weather';
-import WeatherInfo from './components/WeatherInfo'; // Asegúrate de que la ruta sea correcta
+import WeatherInfo from './components/WeatherInfo'; 
 
 
 const App = () => {
   const [countries, setCountries] = useState([]);
-  const [query, setQuery] = useState('');
-  const [filteredCountries, setFilteredCountries] = useState([]);
-  const [selectedCountry, setSelectedCountry] = useState(null);
+  const [query, setQuery] = useState(''); // entrada del usuario
+  const [filteredCountries, setFilteredCountries] = useState([]); // filtrado por el input del usuario
+  const [selectedCountry, setSelectedCountry] = useState(null); // cuando el usuario elige un pais
   const [weather, setWeather] = useState(null); 
-  const [exactMatch, setExactMatch] = useState(null); 
+  const [exactMatch, setExactMatch] = useState(null); // cuando el input coincide con un pais concreto
 
   useEffect(() => {
     axios
@@ -29,7 +29,9 @@ const App = () => {
       );
 
       setFilteredCountries(
-        results.length > 10 ? ['Too many matches'] : results
+        results.length === 0 ? ['No matches found'] : 
+        (results.length > 10 ? ['Too many matches, be more specific'] :
+        results)
       );
 
       const match = results.find(
@@ -44,15 +46,10 @@ const App = () => {
 
   useEffect(() => {
     if (selectedCountry || exactMatch) {
-      const { capitalInfo } = selectedCountry || exactMatch || {};
-      const { latlng } = capitalInfo || {};
-
-      if (latlng) {
-        const [lat, lon] = latlng;
-        Weather.getWeather(lon, lat)
+      const { capital } = selectedCountry || exactMatch || {};
+        Weather.getWeather(capital)
           .then((data) => setWeather(data))
           .catch(console.error);
-      }
     }
   }, [selectedCountry, exactMatch]);
 

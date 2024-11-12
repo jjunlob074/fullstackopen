@@ -40,6 +40,8 @@ input {
   text-align: center;
   width: 100%;
   max-width: 350px; /* Set a max width for large screens */
+  position: relative;
+  perspective: 800px; 
 }
 
 h1,h2{
@@ -57,22 +59,34 @@ strong {
   font-weight: bold;
 }
 
+
 .card img {
   margin-top: 15px;
-  border-radius: 5px;
+  border-radius: 10px;
   max-width: 100%;
   height: auto;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 2px solid #f30e69;
+  transition: transform 0.5s ease, box-shadow 0.5s ease, border 0.5s ease,border-radius 0.5s ease;
+  transform-style: preserve-3d; /* Necesario para aplicar transformaciones en 3D */
 }
+
+.card:hover  img{
+  transform: translateY(-1px) scale(1.02) translateZ(100px); /* Sale hacia fuera en el eje Z */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border: 2px solid #a60169;
+  border-radius: 50%;
+}
+
 ul {
   padding-inline-start: 0;
 }
 li {
   list-style-type: none;
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap:10px;
   padding: 10px 15px;
   margin: 5px 0;
   background-color: #f4f4f9;
@@ -90,7 +104,25 @@ li span {
   font-size: 1rem;
   color: #333;
   font-family: 'Arial', sans-serif;
-  font-weight: 600;
+  font-weight: 800;
+}
+.suggestions-text {
+  font-size: 1.2rem; /* text-3xl */
+  font-weight: 600; /* font-semibold */
+  color: #2d3748; /* text-gray-800 */
+  letter-spacing: 0.05em; /* tracking-wide */
+  font-style: italic;
+  transition: all 0.5s ease;
+}
+.suggestions-img{
+  transition: all 0.5s ease;
+}
+li:hover .suggestions-text {
+  transform: scale(1.01); /* hover:scale-105 */
+}
+li:hover .suggestions-img {
+  transform: scale(1.2);
+  border-radius: 50%;
 }
 
 /* Button Styling */
