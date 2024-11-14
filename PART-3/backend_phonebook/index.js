@@ -1,5 +1,10 @@
 const express = require("express");
+const morgan = require("morgan");  
 const app = express();
+
+// Configura morgan para registrar los mensajes con el formato 'tiny'
+app.use(morgan("tiny"));  
+
 app.use(express.json());
 
 let persons = [
@@ -47,25 +52,24 @@ app.get("/api/persons/:id", (request, response) => {
 });
 
 app.delete("/api/persons/:id", (request, response) => {
-    const id = Number(request.params.id);
-    const personExists = persons.some((person) => person.id === id);
-  
-    if (!personExists) {
-      return response.status(404).json({ error: "Person not found" });
-    }
-  
-    // Eliminar la persona
-    persons = persons.filter((person) => person.id !== id);
-  
-    // Reordenar los índices (si es necesario)
-    persons = persons.map((person, index) => {
-      person.id = index + 1;  // Reasignar id para que los índices sean consecutivos
-      return person;
-    });
-  
-    response.status(204).end();
+  const id = Number(request.params.id);
+  const personExists = persons.some((person) => person.id === id);
+
+  if (!personExists) {
+    return response.status(404).json({ error: "Person not found" });
+  }
+
+  // Eliminar la persona
+  persons = persons.filter((person) => person.id !== id);
+
+  // Reordenar los índices (si es necesario)
+  persons = persons.map((person, index) => {
+    person.id = index + 1;  // Reasignar id para que los índices sean consecutivos
+    return person;
   });
-  
+
+  response.status(204).end();
+});
 
 app.post("/api/persons", (request, response) => {
   const body = request.body;
@@ -85,7 +89,7 @@ app.post("/api/persons", (request, response) => {
   };
 
   persons = persons.concat(newPerson);
-  response.status(201).json(newPerson); 
+  response.status(201).json(newPerson);
 });
 
 const PORT = 3001;
