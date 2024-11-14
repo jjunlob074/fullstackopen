@@ -1,11 +1,16 @@
 const express = require("express");
-const morgan = require("morgan");  
+const morgan = require("morgan");
 const app = express();
 
-// Configura morgan para registrar los mensajes con el formato 'tiny'
-app.use(morgan("tiny"));  
-
+// middleware json.parser
 app.use(express.json());
+
+morgan.token("body", (req) => {
+  return req.method === "POST" ? JSON.stringify(req.body) : '{}';
+});
+
+// middleware morgan
+app.use(morgan(":method :url :status :response-time ms :body"));
 
 let persons = [
   { id: 1, name: "Arto Hellas", number: "040-123456" },
