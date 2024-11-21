@@ -9,7 +9,8 @@ The application is available at the following link:
 
 ## 📂 Repository
 
-The source code used for the deployment is hosted in this repository:  
+The source code used for the deployment is hosted in this repository:
+#### 💥 ACTIVITIES 3.13-3.22 IN THIS REPOSITORY  
 [https://github.com/jjunlob074/deploy3.b](https://github.com/jjunlob074/deploy3.b)
 
 ## 🚀 Build and Deployment Process
