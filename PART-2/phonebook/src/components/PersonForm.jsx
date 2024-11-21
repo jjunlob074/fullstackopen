@@ -49,7 +49,7 @@ const PersonForm = (props) => {
         setNewNumber('');
         showNotification(`Successfully added ${returnedPerson.name}`, 'success');
       })
-      .catch((error) => showNotification(`Error creating person: ${error.message}`, 'error'));
+      .catch((error) => showNotification(`Error creating person: ${error.response.data.error}`, 'error'));
   };
 
   return (
